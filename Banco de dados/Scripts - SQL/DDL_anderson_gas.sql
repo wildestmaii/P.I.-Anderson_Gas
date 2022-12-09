@@ -21,7 +21,7 @@ USE `andersonGas` ;
 -- Table `andersonGas`.`endereco`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `andersonGas`.`endereco` (
-  `id_endereco` INT NOT NULL,
+  `id_endereco` INT NOT NULL AUTO_INCREMENT,
   `CEP` VARCHAR(8) NOT NULL,
   `cidade` VARCHAR(45) NOT NULL,
   `bairro` VARCHAR(45) NOT NULL,
@@ -56,7 +56,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `andersonGas`.`inventario` (
   `nome_produto` VARCHAR(45) NOT NULL,
-  `codigo_produto` INT NOT NULL,
+  `codigo_produto` INT NOT NULL AUTO_INCREMENT,
   `preco_de_compra` VARCHAR(45) NOT NULL,
   `preco_de_venda` VARCHAR(45) NOT NULL,
   `quantidade` INT NOT NULL,
@@ -69,10 +69,10 @@ ENGINE = InnoDB;
 -- Table `andersonGas`.`pedidos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `andersonGas`.`pedidos` (
-  `id_pedido` INT NOT NULL,
+  `id_pedido` INT NOT NULL AUTO_INCREMENT,
   `data_pedido` DATE NOT NULL,
   `clientes_nome` VARCHAR(100) NOT NULL,
-  `clientes_endereco_id_endereco` INT NOT NULL,
+  `clientes_endereco_id_endereco` INT NOT NULL AUTO_INCREMENT,
   `inventario_nome_produto` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_pedido`),
   INDEX `fk_pedidos_clientes1_idx` (`clientes_nome` ASC, `clientes_endereco_id_endereco` ASC) VISIBLE,
