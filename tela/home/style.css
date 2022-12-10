@@ -1,0 +1,106 @@
+body {
+    margin: 0;
+  }
+  
+
+#eli{
+    background-color:#1C70B0;
+ width: 900px;
+  
+    height: 600px;
+    margin: 0;
+    padding: 0;
+    border-bottom-left-radius:100%;
+    float: right;
+    
+   
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+  }
+  
+  li {
+    display: inline;
+    float: right;
+    border-width: 0;
+  
+  }
+  a {
+    display: block;
+    padding: 18px;
+    font-size: 24px;
+    color: #000;
+    font-weight: 550;
+    text-decoration: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
+  }
+
+  #imgGas{
+    transform:rotate(20deg);
+  }
+  .logo {
+   padding-left: 15px;
+    flex-direction: row;
+    display: flex;
+   align-items: center;
+  
+
+ 
+ 
+
+   
+
+    
+  }
+  .textLogo {
+margin-left: 10px;
+font-size: 24px;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+font-weight: 550;
+}
+#imgLogo {
+    width: 40px;
+    height: 40px;
+  }
+  .buyDiv{
+ 
+    margin: 10%;
+    height: fit-content;
+    
+    width:max-content;
+  }
+  .textBuyYourGLP{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 550;
+    font-size: 58px;
+  }
+  .buttonBuy{
+    width: 188px;
+height: 50px;
+color: #FFF;
+border-width: 0;
+font-size: 22px;
+margin-left: 20px;
+background: #1C70B0;
+border-radius: 25px;
+  }
+  .priceText{
+    font-size: 32px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #787878;
+  }
+  .ic_qualitys{
+    width: 100px;
+    height: 100px;
+    padding-right: 15px;
+  }
+  .textqualitys{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    color: #575757;
+    font-weight: 500;
+  }
