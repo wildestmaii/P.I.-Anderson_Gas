@@ -78,3 +78,46 @@ VALUES
 
 
 
+-- -----------------------------------------------------
+-- Atualizando dados na tabela
+-- -----------------------------------------------------
+
+UPDATE `andersonGas`.`endereco`
+SET `numero` = 662
+WHERE `id_endereco` = 7;
+
+UPDATE `andersonGas`.`endereco`
+SET `rua` = "Rua Malacó"
+WHERE `id_endereco` = 1;
+
+UPDATE `andersonGas`.`endereco`
+SET `rua` = "Rua Órodis"
+WHERE `id_endereco` = 2;
+
+UPDATE `andersonGas`.`endereco`
+SET `rua` = "Rua Nova Descoberta"
+WHERE `id_endereco` = 10;
+
+UPDATE `andersonGas`.`endereco`
+SET `Bairro` = "Nova Descoberta"
+WHERE `id_endereco` = 10;
+
+UPDATE `andersonGas`.`endereco`
+SET `numero` = 3647
+WHERE `id_endereco` = 10;
+
+UPDATE `andersonGas`.`pedidos`
+SET `inventario_nome_produto` = "Abraçadeira para gás de cozinha"
+WHERE `id_pedido` = 9;
+
+UPDATE `andersonGas`.`pedidos`
+SET `inventario_nome_produto` = "Regulador de gás doméstico"
+WHERE `id_pedido` = 4;
+
+UPDATE `andersonGas`.`pedidos`
+SET `inventario_nome_produto` = "Mangueira de gás de cozinha"
+WHERE `id_pedido` = 6;
+
+UPDATE `andersonGas`.`pedidos`
+SET `inventario_nome_produto` = "Abraçadeira para gás de cozinha"
+WHERE `id_pedido` = 3;
