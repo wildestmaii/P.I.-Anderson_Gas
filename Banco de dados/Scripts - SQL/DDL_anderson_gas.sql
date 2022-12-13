@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `andersonGas`.`pedidos` (
   `id_pedido` INT NOT NULL AUTO_INCREMENT,
   `data_pedido` DATE NOT NULL,
   `clientes_nome` VARCHAR(100) NOT NULL,
-  `clientes_endereco_id_endereco` INT NOT NULL AUTO_INCREMENT,
+  `clientes_endereco_id_endereco` INT NOT NULL,
   `inventario_nome_produto` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_pedido`),
   INDEX `fk_pedidos_clientes1_idx` (`clientes_nome` ASC, `clientes_endereco_id_endereco` ASC) VISIBLE,
