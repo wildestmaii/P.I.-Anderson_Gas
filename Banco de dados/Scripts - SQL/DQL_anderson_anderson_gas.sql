@@ -4,6 +4,7 @@
 
 
 /* 
+RELATÓRIO 01
 listar pedidos feitos por clientes no bairro de casa amarela mostrando bairro, 
 cliente e nome do produto
 */
@@ -18,6 +19,7 @@ WHERE clientes_nome IN (
 
 
 /* 
+RELATÓRIO 02
 listar clientes e seus endereçoes
 */
 
@@ -37,6 +39,7 @@ ON clientes.endereco_id_endereco = endereco.id_endereco
 
 
 /* 
+RELATÓRIO 03
 listar os produtos do inventário que foram pedidos pelos clientes pelo menos uma vez
 */
 
@@ -49,6 +52,7 @@ SELECT i.nome_produto, i.preco_de_venda, i.quantidade
 
 
 /* 
+RELATÓRIO 04
 listar todos os pedidos que foram realizados por clientes com nome "Silva"
 */
 
@@ -61,6 +65,7 @@ SELECT *
 
 
 /* 
+RELATÓRIO 05
 listar clientes que tenham feito pelo pedidos em uma determinada data
 */
 
@@ -76,6 +81,7 @@ WHERE EXISTS (
 
 
 /* 
+RELATÓRIO 06
 lista de todos os produtos cuja diferença entre o preço de compra e o preço de 
 venda seja maior que 10
 */
@@ -86,6 +92,7 @@ SELECT nome_produto, preco_de_compra, preco_de_venda, (preco_de_venda - preco_de
 
 
 /* 
+RELATÓRIO 07
 retornar informações dos clientes, endereços, pedidos e produtos, além de 
 calcular o lucro obtido em cada pedido, com base na diferença entre o preço de venda 
 e o preço de compra dos produtos.
@@ -101,6 +108,7 @@ JOIN inventario ON pedidos.inventario_nome_produto = inventario.nome_produto
 
 
 /*
+RELATÓRIO 08
 retornar os pedidos realizados por clientes de determinada cidade, junto com o 
 preço de venda dos produtos
 */
@@ -117,6 +125,7 @@ SELECT p.id_pedido, c.nome AS cliente, i.preco_de_venda
 
 
 /*
+RELATÓRIO 09
 
 */
 
@@ -128,6 +137,7 @@ SELECT c.nome AS nome_cliente, c.telefone, e.CEP, e.cidade, e.bairro, e.rua, e.n
 
 
 /*
+RELATÓRIO 10
 retornar as informações d
 */
 

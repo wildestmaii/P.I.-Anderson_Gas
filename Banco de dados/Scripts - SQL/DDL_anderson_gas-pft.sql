@@ -59,6 +59,131 @@ CREATE PROCEDURE
 -- Criação de functions
 -- -----------------------------------------------------
 
+/*
+FUNÇÃO 01
+retorne o endereço de um cliente a partir do seu nome
+*/
+/*
+DELIMIER//
+CREATE FUNCTION getEnderecoCliente(nome VARCHAR(100))
+RETURNS VARCHAR(255)
+BEGIN
+   DECLARE endereco VARCHAR(255);
+
+   SELECT cidade || ', ' || bairro || ', ' || rua || ', ' || numero || ', ' || UF INTO endereco
+    FROM andersonGas.clientes c
+    INNER JOIN andersonGas.endereco e ON c.endereco_id_endereco = e.id_endereco
+    WHERE c.nome = nome;
+
+   RETURN endereco;
+END//
+DEIMITER;
+
+SELECT getEnderecoCliente('nome');
+*/
+
+
+/*
+FUNÇÃO 02
+retorna o endereço de um cliente a partir do nome do cliente e do ID do endereço.
+*/
+
+DEIMITER//
+CREATE FUNCTION getEnderecoCliente(nome VARCHAR(100), id_endereco INT)
+RETURNS VARCHAR(200)
+BEGIN
+    DECLARE endereco VARCHAR(200);
+    SELECT concat(cidade, ', ', bairro, ', ', rua, ' ', numero, ', ', UF)
+    INTO endereco
+    FROM endereco
+    WHERE id_endereco = endereco_id_endereco
+    AND nome = clientes_nome;
+    RETURN endereco;
+END//
+DEIMITER;
+
+SELECT getEnderecoCliente('Ayrton Santos Maia Medeiros', 1);
+
+
+/*
+FUNÇÃO 03
+calcule o lucro total de uma determinada venda, considerando o preço de compra do produto e o preço de venda
+*/
+
+DELIMITER //
+CREATE FUNCTION calcularLucro(nomeProduto VARCHAR(45), quantidade INT)
+RETURNS FLOAT
+BEGIN
+  DECLARE precoCompra FLOAT;
+  DECLARE precoVenda FLOAT;
+  
+  -- Recuperar o preço de compra e o preço de venda do produto
+  SELECT preco_de_compra, preco_de_venda
+  INTO precoCompra, precoVenda
+  FROM inventario
+  WHERE nome_produto = nomeProduto;
+  
+  -- Retornar o lucro calculado com base nos preços e na quantidade
+  RETURN (precoVenda - precoCompra) * quantidade;
+END//
+DELIMITER ;
+
+
+SELECT calcularLucro('Gás de cozinha', 10);
+
+
+/*
+FUNÇÃO 04
+busca o endereço de um cliente a partir do seu nome
+*/
+
+CREATE FUNCTION getEnderecoCliente(nome VARCHAR(100))
+RETURNS VARCHAR(255)
+BEGIN
+  DECLARE endereco VARCHAR(255);
+  SELECT cidade, bairro, rua, numero, UF INTO endereco
+  FROM andersonGas.endereco
+  INNER JOIN andersonGas.clientes
+  ON andersonGas.endereco.id_endereco = andersonGas.clientes.endereco_id_endereco
+  WHERE andersonGas.clientes.nome = nome;
+  RETURN endereco;
+END;
+
+
+
+/*
+FUNÇÃO 05
+retornasse o preço de venda de um determinado produto a partir de seu nome
+*/
+
+DELIMITER//
+CREATE FUNCTION getPrecoVendaProduto(nome_produto VARCHAR(45)) RETURNS VARCHAR(45)
+BEGIN
+  DECLARE preco_de_venda VARCHAR(45);
+
+  SELECT preco_de_venda INTO preco_de_venda
+  FROM inventario
+  WHERE nome_produto = nome_produto;
+
+  RETURN preco_de_venda;
+END//
+DELIMITER;
+
+SELECT getPrecoVendaProduto('Gás de cozinha') AS preco_de_venda;
+
+
+/*
+FUNÇÃO 06
+*/
+
+
+
+
+
+
+/*
+FUNÇÃO 07
+*/
 
 
 
@@ -78,6 +203,7 @@ END;
 
 
 /*
+TRIGGER 01
 para atualizar o preço de venda automaticamente
 */
 
@@ -90,6 +216,7 @@ END;
 
 
 /*
+TRIGGER 02
 verificar se a quantidade de produtos em estoque é suficiente para atender ao pedido antes 
 de inserir o pedido na tabela pedidos.
 */
@@ -117,6 +244,7 @@ DELIMITER ;
 
 
 /*
+TRIGGER 03
 manter o estoque do inventário atualizado sempre que um novo pedido é inserido na tabela pedidos
 */
 
@@ -138,6 +266,29 @@ BEGIN
     WHERE nome_produto = NEW.inventario_nome_produto;
 END;
 
+
+/*
+TRIGGER 04
+*/
+
+
+
+
+
+
+/*
+TRIGGER 05
+*/
+
+
+
+
+
+
+
+/*
+TRIGGER 06
+*/
 
 
 
