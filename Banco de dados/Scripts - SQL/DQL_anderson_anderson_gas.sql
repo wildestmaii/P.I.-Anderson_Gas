@@ -8,6 +8,7 @@ RELATÓRIO 01
 listar pedidos feitos por clientes no bairro de casa amarela mostrando bairro, 
 cliente e nome do produto
 */
+
 SELECT * FROM pedidos
 WHERE clientes_nome IN (
    SELECT nome FROM clientes
@@ -28,14 +29,6 @@ SELECT c.nome, c.telefone, e.id_endereco, e.bairro, e.rua
         INNER JOIN endereco AS e
             ON c.endereco_id_endereco = e.id_endereco
     ORDER BY e.bairro;
-
-
-
-SELECT nome,  bairro, rua, telefone
-FROM andersonGas.clientes
-INNER JOIN andersonGas.endereco
-ON clientes.endereco_id_endereco = endereco.id_endereco
-
 
 
 /* 
@@ -101,10 +94,10 @@ e o preço de compra dos produtos.
 SELECT clientes.nome, clientes.telefone, endereco.cidade, endereco.UF, pedidos.data_pedido, 
        inventario.nome_produto, inventario.preco_de_compra, inventario.preco_de_venda,
        (inventario.preco_de_venda - inventario.preco_de_compra) AS lucro
-FROM pedidos
-JOIN clientes ON pedidos.clientes_nome = clientes.nome
-JOIN endereco ON clientes.endereco_id_endereco = endereco.id_endereco
-JOIN inventario ON pedidos.inventario_nome_produto = inventario.nome_produto
+    FROM pedidos
+    JOIN clientes ON pedidos.clientes_nome = clientes.nome
+    JOIN endereco ON clientes.endereco_id_endereco = endereco.id_endereco
+    JOIN inventario ON pedidos.inventario_nome_produto = inventario.nome_produto
 
 
 /*
@@ -126,7 +119,7 @@ SELECT p.id_pedido, c.nome AS cliente, i.preco_de_venda
 
 /*
 RELATÓRIO 09
-
+Listar nome, telefone, CEP, cidade, bairro, rua, número e UF dos clientes
 */
 
 SELECT c.nome AS nome_cliente, c.telefone, e.CEP, e.cidade, e.bairro, e.rua, e.numero, e.UF
@@ -134,17 +127,13 @@ SELECT c.nome AS nome_cliente, c.telefone, e.CEP, e.cidade, e.bairro, e.rua, e.n
     JOIN andersonGas.endereco AS e ON c.endereco_id_endereco = e.id_endereco;
 
 
-
-
 /*
 RELATÓRIO 10
-retornar as informações d
+retornar as informações dos pedidos realizados em 2022
 */
-
 
 SELECT clientes_nome, inventario_nome_produto, data_pedido
     FROM pedidos
-    WHERE pedidos.data_pedido BETWEEN '2022-01-01' AND '2022-12-31';
-
+    WHERE pedidos.data_pedido BETWEEN '01-01-22' AND '31-12-22';
 
 

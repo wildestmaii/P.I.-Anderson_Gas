@@ -3,19 +3,23 @@
 -- -----------------------------------------------------
 
 /*
+PROCEDURE 01
 recebe dois parâmetros de entrada: inicio e fim, que representam as datas inicial e final, 
 respectivamente. Quando a procedure é chamada, ela retorna todos os pedidos realizados 
 entre as duas datas fornecidas
 */
 
+DELIMITER //
 CREATE PROCEDURE andersonGas.listar_pedidos(IN inicio DATE, IN fim DATE)
 BEGIN
     SELECT * FROM andersonGas.pedidos
     WHERE data_pedido BETWEEN inicio AND fim;
-END;
+END//
+DELIMITER ;
 
 /*
-cadastrar pedidos 
+PROCEDURE 02
+cadastramento de pedidos 
 */
 
 CREATE PROCEDURE andersonGas.cadastrar_pedido(
@@ -35,25 +39,7 @@ END;
 
 
 
-CREATE PROCEDURE 
 
-CREATE PROCEDURE 
-
-CREATE PROCEDURE 
-
-CREATE PROCEDURE 
-
-CREATE PROCEDURE 
-
-CREATE PROCEDURE 
-
-CREATE PROCEDURE 
-
-CREATE PROCEDURE 
-
-CREATE PROCEDURE 
-
-CREATE PROCEDURE 
 
 -- -----------------------------------------------------
 -- Criação de functions
@@ -88,7 +74,7 @@ FUNÇÃO 02
 retorna o endereço de um cliente a partir do nome do cliente e do ID do endereço.
 */
 
-DEIMITER//
+DELIMITER //
 CREATE FUNCTION getEnderecoCliente(nome VARCHAR(100), id_endereco INT)
 RETURNS VARCHAR(200)
 BEGIN
@@ -100,9 +86,7 @@ BEGIN
     AND nome = clientes_nome;
     RETURN endereco;
 END//
-DEIMITER;
-
-SELECT getEnderecoCliente('Ayrton Santos Maia Medeiros', 1);
+DELIMITER ;
 
 
 /*
@@ -129,25 +113,14 @@ END//
 DELIMITER ;
 
 
-SELECT calcularLucro('Gás de cozinha', 10);
+SELECT calcularLucro("Mangueira de gás de cozinha", 10);
 
 
 /*
 FUNÇÃO 04
-busca o endereço de um cliente a partir do seu nome
 */
 
-CREATE FUNCTION getEnderecoCliente(nome VARCHAR(100))
-RETURNS VARCHAR(255)
-BEGIN
-  DECLARE endereco VARCHAR(255);
-  SELECT cidade, bairro, rua, numero, UF INTO endereco
-  FROM andersonGas.endereco
-  INNER JOIN andersonGas.clientes
-  ON andersonGas.endereco.id_endereco = andersonGas.clientes.endereco_id_endereco
-  WHERE andersonGas.clientes.nome = nome;
-  RETURN endereco;
-END;
+
 
 
 
@@ -194,33 +167,15 @@ FUNÇÃO 07
 -- Criação de triggers
 -- -----------------------------------------------------
 
-CREATE TRIGGER nome_do_gatilho
-AFTER INSERT ON nome_da_tabela
-FOR EACH ROW
-BEGIN
-   -- aqui vão as instruções SQL que o gatilho irá executar
-END;
+
 
 
 /*
 TRIGGER 01
-para atualizar o preço de venda automaticamente
-*/
-
-CREATE TRIGGER atualizar_preco_venda
-AFTER UPDATE ON inventario
-FOR EACH ROW
-BEGIN
-   SET NEW.preco_de_venda = NEW.preco_de_compra * 1.2;
-END;
-
-
-/*
-TRIGGER 02
 verificar se a quantidade de produtos em estoque é suficiente para atender ao pedido antes 
 de inserir o pedido na tabela pedidos.
 */
-
+--funcionou
 DELIMITER //
 
 CREATE TRIGGER andersonGas.verifica_estoque_antes_insercao_pedido
@@ -242,21 +197,13 @@ END //
 DELIMITER ;
 
 
-
 /*
-TRIGGER 03
+TRIGGER 02
 manter o estoque do inventário atualizado sempre que um novo pedido é inserido na tabela pedidos
 */
 
-CREATE TRIGGER andersonGas.atualizar_estoque
-AFTER INSERT ON andersonGas.pedidos
-FOR EACH ROW
-BEGIN
-    UPDATE andersonGas.inventario
-    SET quantidade = quantidade - 1
-    WHERE nome_produto = NEW.inventario_nome_produto;
-END;
-
+---funcionou
+DELIMITER //
 CREATE TRIGGER andersonGas.atualizar_quantidade_inventario
 AFTER INSERT ON andersonGas.pedidos
 FOR EACH ROW
@@ -264,7 +211,24 @@ BEGIN
     UPDATE andersonGas.inventario
     SET quantidade = quantidade - 1
     WHERE nome_produto = NEW.inventario_nome_produto;
-END;
+END//
+DELIMITER ;
+
+
+/*
+TRIGGER 03
+para atualizar o preço de venda automaticamente
+*/
+
+
+DELIMITER //
+CREATE TRIGGER atualizar_preco_venda
+AFTER UPDATE ON inventario
+FOR EACH ROW
+BEGIN
+   SET NEW.preco_de_venda = NEW.preco_de_compra * 1.2;
+END//
+DELIMITER ;
 
 
 /*
