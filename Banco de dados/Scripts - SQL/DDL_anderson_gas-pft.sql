@@ -22,6 +22,7 @@ PROCEDURE 02
 cadastramento de pedidos 
 */
 
+DELIMITER //
 CREATE PROCEDURE andersonGas.cadastrar_pedido(
     IN p_data_pedido DATE,
     IN p_nome_cliente VARCHAR(100),
@@ -35,39 +36,46 @@ BEGIN
 
     INSERT INTO andersonGas.pedidos (data_pedido, clientes_nome, clientes_endereco_id_endereco, inventario_nome_produto)
     VALUES (p_data_pedido, p_nome_cliente, p_id_endereco, p_nome_produto);
-END;
+END//
+DELIMITER ;
+
+/*
+PROCEDURE 03
+calcula o custo total de um pedido, multiplicando o valor dos items pela quantidade 
+requirida de cada um
+*/
+
+DELIMITER //
+CREATE PROCEDURE get_order_total(IN order_id INT)
+BEGIN
+  SELECT SUM(preco_de_venda * quantidade) AS total_cost
+  FROM andersonGas.inventario i
+  JOIN andersonGas.pedidos p ON i.nome_produto = p.inventario_nome_produto
+  WHERE p.id_pedido = order_id;
+END //
+DELIMITER ;
 
 
+/*
+PROCEDURE 05
+conte quantas vezes um cliente fez um pedido
+*/
 
+DELIMITER $$
+
+CREATE PROCEDURE numero_pedidos_cliente(IN nome VARCHAR(100), IN endereco_id INT, OUT num_pedidos INT)
+BEGIN
+  SELECT COUNT(*) INTO num_pedidos
+  FROM pedidos p
+  WHERE p.clientes_nome = nome AND p.clientes_endereco_id_endereco = endereco_id;
+END $$
+
+DELIMITER ;
 
 
 -- -----------------------------------------------------
 -- Criação de functions
 -- -----------------------------------------------------
-
-/*
-FUNÇÃO 01
-retorne o endereço de um cliente a partir do seu nome
-*/
-/*
-DELIMIER//
-CREATE FUNCTION getEnderecoCliente(nome VARCHAR(100))
-RETURNS VARCHAR(255)
-BEGIN
-   DECLARE endereco VARCHAR(255);
-
-   SELECT cidade || ', ' || bairro || ', ' || rua || ', ' || numero || ', ' || UF INTO endereco
-    FROM andersonGas.clientes c
-    INNER JOIN andersonGas.endereco e ON c.endereco_id_endereco = e.id_endereco
-    WHERE c.nome = nome;
-
-   RETURN endereco;
-END//
-DEIMITER;
-
-SELECT getEnderecoCliente('nome');
-*/
-
 
 /*
 FUNÇÃO 02
@@ -113,17 +121,6 @@ END//
 DELIMITER ;
 
 
-SELECT calcularLucro("Mangueira de gás de cozinha", 10);
-
-
-/*
-FUNÇÃO 04
-*/
-
-
-
-
-
 /*
 FUNÇÃO 05
 retornasse o preço de venda de um determinado produto a partir de seu nome
@@ -142,32 +139,53 @@ BEGIN
 END//
 DELIMITER;
 
-SELECT getPrecoVendaProduto('Gás de cozinha') AS preco_de_venda;
-
 
 /*
 FUNÇÃO 06
+ dado o nome de um cliente e o código de um produto, retorna o valor total do pedido, 
+ considerando a quantidade de produtos solicitada pelo cliente e o preço de venda de 
+ cada produto.
 */
 
+DELIMITER //
+CREATE FUNCTION valorTotalDoPedido(nomeCliente VARCHAR(100), codigoProduto INT)
+RETURNS DECIMAL(10,2)
+BEGIN
+  DECLARE valorTotal DECIMAL(10,2);
 
+  SELECT i.preco_de_venda * p.quantidade
+  INTO valorTotal
+  FROM pedidos p
+  INNER JOIN inventario i ON i.nome_produto = p.inventario_nome_produto
+  WHERE p.clientes_nome = nomeCliente AND i.codigo_produto = codigoProduto;
 
-
+  RETURN valorTotal;
+END//
+DELIMITER ;
 
 
 /*
 FUNÇÃO 07
+conte quantas vezes um cliente fez um pedido
 */
 
+DELIMITER //
 
+CREATE FUNCTION numero_pedidos_cliente(nome VARCHAR(100), endereco_id INT) RETURNS INT
+BEGIN
+  DECLARE num_pedidos INT;
+  SELECT COUNT(*) INTO num_pedidos
+  FROM pedidos p
+  WHERE p.clientes_nome = nome AND p.clientes_endereco_id_endereco = endereco_id;
+  RETURN num_pedidos;
+END//
 
-
+DELIMITER ;
 
 
 -- -----------------------------------------------------
 -- Criação de triggers
 -- -----------------------------------------------------
-
-
 
 
 /*

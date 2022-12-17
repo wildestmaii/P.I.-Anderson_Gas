@@ -74,8 +74,19 @@ VALUES
 (7, '01-12-22', "Mirelle da Silva Coutinho", 7, "Gás liquefeito de petróleo(GLP)"),
 (8, '01-12-22', "Quézia Cassiano de Souza Silva", 8, "Gás liquefeito de petróleo(GLP)"),
 (9, '01-12-22', "Sabrina Maria da Silva", 9, "Gás liquefeito de petróleo(GLP)"),
-(10, '31-12-22', "Sara Rayane Araujo Lopes", 10, "Gás liquefeito de petróleo(GLP)");
-
+(10, '31-12-22', "Sara Rayane Araujo Lopes", 10, "Gás liquefeito de petróleo(GLP)"),
+(11, '01-12-22', "Douglas Guedes da Silva Junior", 2, "Gás liquefeito de petróleo(GLP)"),
+(12, '01-12-22', "Douglas Guedes da Silva Junior", 2, "Gás liquefeito de petróleo(GLP)"),
+(13, '01-12-22', "Douglas Guedes da Silva Junior", 2, "Gás liquefeito de petróleo(GLP)"),
+(14, '01-12-22', "Gilmar Adrian de Souza Braz", 5, "Gás liquefeito de petróleo(GLP)"),
+(15, '01-12-22', "Gilmar Adrian de Souza Braz", 5, "Gás liquefeito de petróleo(GLP)"),
+(16, '01-12-22', "Mirelle da Silva Coutinho", 7, "Gás liquefeito de petróleo(GLP)"),
+(17, '01-12-22', "Mirelle da Silva Coutinho", 7, "Gás liquefeito de petróleo(GLP)"),
+(18, '01-12-22', "Mirelle da Silva Coutinho", 7, "Gás liquefeito de petróleo(GLP)"),
+(19, '01-12-22', "Mirelle da Silva Coutinho", 7, "Gás liquefeito de petróleo(GLP)"),
+(20, '01-12-22', "Erika Vilas Boas dos Santos", 3, "Gás liquefeito de petróleo(GLP)"),
+(21, '01-12-22', "Erika Vilas Boas dos Santos", 3, "Gás liquefeito de petróleo(GLP)"),
+(22, '01-12-22', "Sabrina Maria da Silva", 9, "Gás liquefeito de petróleo(GLP)");
 
 
 -- -----------------------------------------------------

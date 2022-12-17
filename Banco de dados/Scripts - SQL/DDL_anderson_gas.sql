@@ -98,23 +98,60 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- Criando Views
 -- -----------------------------------------------------
 
-CREATE VIEW IF NOT EXISTS 
+CREATE VIEW IF NOT EXISTS pedidosXbairros AS
+  SELECT * FROM pedidos
+  WHERE clientes_nome IN (
+     SELECT nome FROM clientes
+      WHERE endereco_id_endereco IN (
+        SELECT id_endereco FROM endereco
+        WHERE bairro = "Casa Amarela"
+      )
+  );
 
-CREATE VIEW IF NOT EXISTS 
 
-CREATE VIEW IF NOT EXISTS 
+CREATE VIEW IF NOT EXISTS clientesXenderecos AS
+  SELECT c.nome, c.telefone, e.id_endereco, e.bairro, e.rua
+    FROM clientes AS c
+        INNER JOIN endereco AS e
+            ON c.endereco_id_endereco = e.id_endereco
+    ORDER BY e.bairro;
 
-CREATE VIEW IF NOT EXISTS 
 
-CREATE VIEW IF NOT EXISTS 
+CREATE VIEW IF NOT EXISTS dataPedidos AS
+  SELECT *
+  FROM clientes
+    WHERE EXISTS (
+      SELECT *
+		  FROM pedidos
+		    WHERE pedidos.clientes_nome = clientes.nome
+			    AND pedidos.clientes_endereco_id_endereco = clientes.endereco_id_endereco
+			    AND pedidos.data_pedido = '01-12-22'
+    )
 
-CREATE VIEW IF NOT EXISTS 
 
-CREATE VIEW IF NOT EXISTS 
+CREATE VIEW IF NOT EXISTS clientesPedidos AS
+  SELECT clientes.nome, clientes.telefone, endereco.cidade, endereco.UF, pedidos.data_pedido, 
+       inventario.nome_produto, inventario.preco_de_compra, inventario.preco_de_venda,
+       (inventario.preco_de_venda - inventario.preco_de_compra) AS lucro
+    FROM pedidos
+    JOIN clientes ON pedidos.clientes_nome = clientes.nome
+    JOIN endereco ON clientes.endereco_id_endereco = endereco.id_endereco
+    JOIN inventario ON pedidos.inventario_nome_produto = inventario.nome_produto
 
-CREATE VIEW IF NOT EXISTS 
 
-CREATE VIEW IF NOT EXISTS 
+CREATE VIEW IF NOT EXISTS clientesDados AS
+  SELECT clientes.nome, clientes.telefone, endereco.cidade, endereco.UF, pedidos.data_pedido, 
+       inventario.nome_produto, inventario.preco_de_compra, inventario.preco_de_venda,
+       (inventario.preco_de_venda - inventario.preco_de_compra) AS lucro
+    FROM pedidos
+    JOIN clientes ON pedidos.clientes_nome = clientes.nome
+    JOIN endereco ON clientes.endereco_id_endereco = endereco.id_endereco
+    JOIN inventario ON pedidos.inventario_nome_produto = inventario.nome_produto
 
-CREATE VIEW IF NOT EXISTS 
+
+CREATE VIEW IF NOT EXISTS pedidosEntre AS
+  SELECT clientes_nome, inventario_nome_produto, data_pedido
+    FROM pedidos
+    WHERE pedidos.data_pedido BETWEEN '01-01-22' AND '31-12-22';
+
 
